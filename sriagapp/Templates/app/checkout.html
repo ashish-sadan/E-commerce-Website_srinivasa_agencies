@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href = "{% static '/css/checkout.css' %}">
+	<link rel="stylesheet" href = "{% static '/css/addtocart_cookies.css' %}">
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<title>Document</title>
+	<style>
+		.cart-count {
+		  color: black;
+		  font-weight: bold;
+		}
+	  </style>
+	<script type="text/javascript">
+		var user = '{{request.user}}'
+		function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+
+		function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
+
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
+
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
+
+		    // Return null if not found
+		    return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
+
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		}
+		console.log('Cart:', cart)
+
+		let btnRemove=document.querySelectorAll('.cart-remove');
+        btnRemove.forEach((btn)=>{
+          btn.addEventListener('click',removeItem);
+		});
+	
+	</script>
+</head>
+<body>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="box-element" id="form-wrapper">
+				<form id="form">
+					<div id="user-info">
+						<div class="form-field">
+							<input required class="form-control" type="text" name="name" placeholder="Name..">
+						</div>
+						<div class="form-field">
+							<input required class="form-control" type="email" name="email" placeholder="Email..">
+						</div>
+					</div>
+					<div id="shipping-info">
+						<hr>
+						<p>Shipping Information:</p>
+						<hr>
+						<div class="form-field">
+							<input class="form-control" type="text" name="address" placeholder="Address..">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="city" placeholder="City..">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="state" placeholder="State..">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+						</div>
+						<div class="form-field">
+							<input class="form-control" type="text" name="country" placeholder="Zip code..">
+						</div>
+					</div>
+
+					<hr>
+					<input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
+				</form>
+			</div>
+			<br>
+			<div class="box-element hidden" id="payment-info">
+				<small>Paypal Options</small>
+				<button id="make-payment">Make payment</button>
+				<div id="paypal-button-container"></div>
+			</div>
+		</div>
+
+		<div class="col-lg-6">
+			<div class="box-element">
+
+				<a  class="btn btn-outline-dark" href="{% url 'cookies'%}">&#x2190; Back to Cart</a>
+				<hr>
+				<h3>Order Summary</h3>
+				<hr>
+				<center>
+				<div class="box">
+					<div class="cart-count">{{cartItems}}</div>
+					<a href = "{% url 'checkout' %}">
+					<ion-icon name="cart"  id="cart-icon" ></ion-icon>
+					</a>
+				  </div>
+				</center>
+					<div class="cart-title">Cart Items</div>
+					<div class="cart-content">
+						{% for item in items %}
+						<div class="cart-row">
+							<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+							<div style="flex:2"><p>{{item.product.name}}</p></div>
+							<div style="flex:1"><p>${{item.product.price|floatformat:2}}</p></div>
+							<div style="flex:1">
+								<p class="quantity">{{item.quantity}}</p>
+								<div class="quantity">
+									<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+									
+									<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+								</div>
+							</div>
+							<div style="flex:1"><p>${{item.get_total|floatformat:2}}</p></div>
+						</div>
+						{% endfor %}
+				  <div class="total">
+					<div class="total-title">Total</div>
+					<div class="total-price">${{order.get_cart_total|floatformat:2}}</div>
+				  </div>
+				  <button class="btn-buy"><a = href="{% url 'cookies'%}">PLACE ORDER</a></button>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="{% static '/java scripts/cart.js' %}"></script>
+</body>
+
+
+</html>

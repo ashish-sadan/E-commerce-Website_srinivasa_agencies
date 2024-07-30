@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name":" Butter Cookies Pack",
+        "price": 200,
+        "image": "images_cookies/Butter Cookies Pack.jpg"
+    },
+    {
+        "id": 2,
+        "name":" Butter-Cookies1",
+        "price": 250,
+        "image": "images_cookies/Butter-Cookies1.jpg"
+    },
+    {
+        "id": 3,
+        "name":" Chai Cookies",
+        "price": 290,
+        "image": "images_cookies/Chai Cookies.jpg"
+    },
+    {
+        "id": 4,
+        "name":" Choco Cookies",
+        "price": 200,
+        "image": "images_cookies/Choco Cookies.jpg"
+    },
+    {
+        "id": 5,
+        "name":" Fruit Cookies Pack",
+        "price": 300,
+        "image": "images_cookies/Fruit Cookies Pack.jpg"
+    },
+    {
+        "id": 6,
+        "name":" Fruit Cookies",
+        "price": 200,
+        "image": "images_cookies/Fruit Cookies.jpg"
+    },
+    {
+        "id": 7,
+        "name":" Kaju Cookies",
+        "price": 200,
+        "image": "images_cookies/Kaju Cookies.jpg"
+    },
+    {
+        "id": 8,
+        "name":" Milk-Cookies",
+        "price": 200,
+        "image": "images_cookies/Milk-Cookies.jpg"
+    },
+    {
+        "id": 9,
+        "name":"Osmania Biscuits ",
+        "price": 200,
+        "image": "images_cookies/Osmania Biscuits.jpg"
+    }
+]

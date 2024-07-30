@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href = "{% static '/css/addtocart_cookies.css' %}">
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .shop-content{
+        background-image: url("{% static '/Image/newbk1.AVIF'%}");
+        padding: 1px;
+        margin-top: 20px;
+
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="logo">
+        <img src= "{% static '/Image/rose.png'%}", class = "logo" height = "70" , width = "80"   >
+        <!-- <ion-icon name="fast-food"></ion-icon> -->
+      </a>
+      <nav>
+      <ul>
+        <li><a href="#">ABOUT US</li>
+        <li><a href="#">PRODUCTS</li>
+        <li><a href="#">DEALER PROFILE</li>
+        <li><a href="#">CONTACT US</li>            
+      </ul>
+      </nav>
+  </header>
+  <div class="container">
+    <h2 class="title"></h2>
+    <div class="shop-content">
+
+      <div class="food-box">
+        <div class="pic">
+            <a href = "{% url 'cookies'%}">
+          <img src="{% static '/Image/rose images/Cookies.WEBP'%}" class="food-img">
+        </div>
+           <h2 class="food-title">Cookies</h2>
+            </a>
+      </div>
+
+      <div class="food-box">
+        <a href = "{% url 'popcorn'%}">
+        <div class="pic"><img src="{% static '/Image/rose images/popcorncrop.jpg'%}" class="food-img"></div>
+        <h2 class="food-title">Popcorn</h2>
+        </a>
+      </div>
+  
+      <div class="food-box">
+        <a href = "{% url 'papad'%}">
+        <div class="pic"><img src = "{% static '/Image/rose images/papads.jpg'%}" class="food-img"></div>
+        <h2 class="food-title">Papad</h2>
+        </a>
+      </div>
+  
+      <div class="food-box">
+        <a href = "{% url 'rotary'%}">
+        <div class="pic"><img src="{% static '/Image/rose images/Rotary.jpg'%}" class="food-img"></div>
+        <h2 class="food-title">Rotary</h2>
+        </a>
+      </div>
+  
+      <div class="food-box">
+        <a href = "{% url 'wafers'%}">
+        <div class="pic"><img src="{% static '/Image/rose images/newwafers.jpg'%}" class="food-img"></div>
+        <h2 class="food-title">Fruit Cookies Pack</h2>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="{% static '/java scripts/addtocart.js' %}"></script>
+
+</body>
+<footer >
+  <div class="row">
+      <div class="col1">
+          <h4>Our products </h4>
+          <ul>
+              <li><a href = "#"> Nestle </a></li>
+              <li><a href = "#"> Colgate </a></li>
+              <li><a href = "#"> Santoor </a></li>
+              <li><a href = "#"> Rose </a></li>
+              <li><a href = "#"> gold drop </a></li>
+              <li><a href = "#"> Xtra </a></li>
+              <li><a href = "#"> parachute </a></li>
+              <li><a href = "#"> Allout </a></li>
+          </ul> 
+      </div>
+      <div class="col2">
+          <h3>Contact</h3>
+          <ul>
+              <li><a href = "#"> 12-41/B REDDY COLONY SIDDIPET TELANGANA INDIA 505467 </a></li>
+              <li><a href = "#"> Mobile : 9849034276 </a></li>
+              <li><a href = "#"> Email : kurapatiashish13@gmail.com </a></li>
+          </ul>
+      </div>
+      <div class="col3">
+          <h4>Get in Touch </h4>
+          <ul>
+              <li><a href = "#"> <i class="fa-brands fa-twitter"></i> </a></li>
+              <li><a href = "#"> <i class="fa-brands fa-linkedin"></i> </a></li>
+              <li><a href = "#"> <i class="fa-brands fa-facebook"></i> </a></li>
+              <li><a href = "#"> <i class="fa-brands fa-instagram"></i> </a></li>
+          </ul>            
+      </div>
+  </div>
+  <div class = "footerBottom">
+      <p>Copyright &copy;2024; Designed by <span class = "designer">Ashish Sadan</span></p>
+  </div>
+</footer>
+</html>
+</html>
